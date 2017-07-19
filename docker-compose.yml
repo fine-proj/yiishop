@@ -1,0 +1,14 @@
+version: '2'
+services:
+  web:
+    build: .
+    ports:
+     - "80:80"
+     - "3306:3306"
+    volumes:
+     - .:/app
+    environment:
+       MYSQL_ROOT_PASSWORD: '123'
+       MYSQL_DATABASE: 'yii2_loc'
+       MYSQL_USER: 'root'
+       MYSQL_PASSWORD: '23'
