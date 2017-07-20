@@ -21,7 +21,10 @@ RUN apt-get update && \
     apt-get install -y php7.0-mysql
 
 
-RUN rm -rf /var/www/html && ln -fs /app/web /var/www/html
+RUN a2enmod rewrite && \
+    sed -i "s/<VirtualHost \*:80>/<VirtualHost \*:80>\n<Directory \/var\/www\/html>\nOptions Indexes FollowSymLinks MultiViews\nAllowOverride All\nOrder allow,deny\nallow from all\n<\/Directory>/g" /etc/apache2/sites-available/000-default.conf
+
+RUN rm -rf /var/www/html && ln -fs /app /var/www/html
 RUN sed -i 's/;openssl.cafile=/openssl.cafile=\/app\/cacert.pem/g' /etc/php/7.0/cli/php.ini
 
 
