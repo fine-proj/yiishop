@@ -2,10 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
-/* @var $this yii\web\View */
-/* @var $model app\modules\admin\models\Product */
-/* @var $form yii\widgets\ActiveForm */
+use mihaildev\ckeditor\CKEditor;
 ?>
 
 <div class="product-form">
@@ -24,7 +21,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?php // $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?php
+        echo $form->field($model, 'content')->widget(CKEditor::className(),[
+            'editorOptions' => [
+                'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
+                'inline' => false, //по умолчанию false
+            ],
+        ]);
+    ?>
 
     <?= $form->field($model, 'price')->textInput() ?>
 
