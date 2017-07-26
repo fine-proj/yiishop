@@ -106,7 +106,10 @@ AppAsset::register($this);
                                 <li><a href="<?= \yii\helpers\Url::to(['/site/logout']) ?>"><i class="fa fa-user"></i>
                                        <?=Yii::$app->user->identity['username']; ?> (выход) </a></li>
                             <?php endif; ?>
-                            <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
+                            <?php if(Yii::$app->user->isGuest): ?>
+                                <li><a href="<?= \yii\helpers\Url::to(['/site/signup']) ?>"><i class="fa fa-star"></i>
+                                        Register </a></li>
+                            <?php endif; ?>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                             <li><a href="<?= \yii\helpers\Url::to(['/admin']) ?>"><i class="fa fa-lock"></i> Login</a></li>
