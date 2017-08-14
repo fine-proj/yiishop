@@ -52,17 +52,16 @@ use yii\helpers\Html;
                     <h2 class="title text-center"><?= $category->name; ?></h2>
                     <?php if(!empty($products)): ?>
                         <?php foreach($products as $product): ?>
+                            <?php $mainImg = $product->getImage();?>
                             <div class="col-sm-4">
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <a href="<?= \yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>">
-                                                <?= Html::img("@web/images/products/{$product->img}", ['alt' => $product->name]); ?>
-                                            </a><h2>$<?= $product->price; ?></h2>
-                                            <p><a href="<?= \yii\helpers\Url::to(['product/view', 'id' => $product->id]); ?>">
-                                                <?= $product->name; ?></a>
-                                            </p>
-                                            <a href="#" data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <?= Html::img($mainImg->getUrl('268x249'), ['alt' => $product->name])?>
+                                            <h2>$<?= $product->price?></h2>
+                                            <p><a href="<?= \yii\helpers\Url::to(['product/view', 'id' => $product->id]) ?>"><?= $product->name?></a></p>
+                                            <a href="#" data-id="<?= $product->id?>" class="btn btn-default add-to-cart">
+                                                <i class="fa fa-shopping-cart"></i>Add to cart</a>
                                         </div>
                                         <?php if($product->new): ?>
                                             <?= Html::img("@web/images/home/new.png", ['class' => 'new', 'alt' => 'Новинка']); ?>

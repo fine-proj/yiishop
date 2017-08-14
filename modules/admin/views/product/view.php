@@ -14,6 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php
+        $img = $model->getImage();
+        //echo '<pre>'. print_r($img, true). '</pre>';
+    ?>
+
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -31,11 +36,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'category_id',
             'name',
-            'content:ntext',
+            'content:html',
             'price',
             'keywords',
             'description',
-            'img',
+            //'img',
+            [
+                'attribute' => 'image',
+                'value' => "<img src='{$img->getUrl()}'>",
+                'format' => 'html',
+            ],
             'hit',
             'new',
             'sale',

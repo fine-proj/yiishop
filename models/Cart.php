@@ -4,8 +4,19 @@ use yii\db\ActiveRecord;
 
 class Cart extends ActiveRecord {
 
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
+
     public function  addToCart($product, $qty = 1){
-       //проверка наличия товара в корзине (в сессии)
+
+        $mainImg = $product->getImage();
+        //проверка наличия товара в корзине (в сессии)
         if(isset($_SESSION['cart'][$product->id]))
         {   //если такой товар есть, то увеличиваем его кол-во
             $_SESSION['cart'][$product->id]['qty'] += $qty;
@@ -15,7 +26,7 @@ class Cart extends ActiveRecord {
                 'qty' => $qty,
                 'name' => $product->name,
                 'price' => $product->price,
-                'img' => $product->img
+                'img' => $mainImg->getUrl('x50'),
             ];
         }
 
